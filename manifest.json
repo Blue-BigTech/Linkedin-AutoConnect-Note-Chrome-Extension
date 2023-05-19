@@ -1,0 +1,20 @@
+{
+  "name": "Linkedin-Connect-Note",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "description": "Automatically connect with note on Linkedin",
+  "permissions": ["scripting","activeTab", "storage", "tabs","declarativeNetRequestWithHostAccess"],
+  
+  "action": {
+    "default_title": "Linkedin-Connect-Note",
+    "default_popup": "popup.html"
+  },
+
+   "host_permissions": [
+      "<all_urls>"
+   ]
+}
