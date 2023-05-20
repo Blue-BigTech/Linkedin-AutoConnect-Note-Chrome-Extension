@@ -54,7 +54,7 @@ function ss_clickHandler(e) {
     })
 
     ss_state = true;
-  } else { // ss_state == true
+  } else { 
     chrome.runtime.sendMessage({message: "stop clicked!"});
     ss_button.textContent = 'Start';
     resetAll();

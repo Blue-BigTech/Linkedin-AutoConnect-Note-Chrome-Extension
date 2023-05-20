@@ -24,12 +24,10 @@ chrome.runtime.onMessage.addListener(
 // }
 
 async function connectOnPage(limit, note){
-	// document.body.style.backgroundColor = 'red';
 	console.log("Start Connecting...");
   const nlimit = parseInt(limit);
   await _scrollDown();
   
-  // const allPeople = document.querySelectorAll("span.artdeco-button__text");
   const allButtons = document.getElementsByClassName("artdeco-button artdeco-button--2 artdeco-button--secondary ember-view");
   const count = allButtons.length;
   for(let i = 0; i < count; i++) {
