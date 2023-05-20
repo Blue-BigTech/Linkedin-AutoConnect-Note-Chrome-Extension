@@ -1,15 +1,12 @@
-console.log("++++++++++++++++++++++++++++++++++")
+console.log("++++++++++++++++ Load Script ++++++++++++++++++")
+var counter = 0;
 chrome.runtime.onMessage.addListener(
   async function(request, sender, sendResponse) {
     if (request.message === 'start') {
       console.log("*******Start********");
-      // console.log("-------Start--------");
-      // const status = true;
-      // saveValue(status);
-      // const passList = document.querySelectorAll(".encounters-action--dislike");
-      // const pass = passList[0];
-      // pass.click();
-      await connectOnPage();
+      const limit = request.limit;
+      const note = request.note;
+      connectOnPage(limit, note);
       console.log("********End*******");
     }
 });
@@ -26,9 +23,10 @@ chrome.runtime.onMessage.addListener(
 //   })
 // }
 
-async function connectOnPage(){
+async function connectOnPage(limit, note){
 	// document.body.style.backgroundColor = 'red';
 	console.log("Start Connecting...");
+  const nlimit = parseInt(limit);
   await _scrollDown();
   
   // const allPeople = document.querySelectorAll("span.artdeco-button__text");
@@ -39,23 +37,35 @@ async function connectOnPage(){
     if(spanText === "Connect"){
       allButtons[i].click();
       await _waitSeconds(2000);
-      console.log("+++++++++++++")
       var addNoteBtn = document.querySelector('[aria-label="Add a note"]');
       addNoteBtn.click();
       await _waitSeconds(2000);
       const textAreaElm = document.getElementById("custom-message");
-      console.log(textAreaElm);
-      textAreaElm.value = "How are you?"
+      textAreaElm.value = note;
 
       var evt = document.createEvent("Events");
       evt.initEvent("change", true, true);
       textAreaElm.dispatchEvent(evt);
+      await _waitSeconds(1000);
 
-      break;//TODO
+      const sendBtn = document.getElementsByClassName("artdeco-button artdeco-button--2 artdeco-button--primary ember-view ml1")[0];
+      console.log(sendBtn);
+      sendBtn.click();
+      counter++;
+      console.log(counter);
+      if(counter >= nlimit){
+        break;
+      }
+      await _waitSeconds(2000);
     }
   }
+  await _waitSeconds(1000);
 
-  // _goNextPage();
+  if(counter < nlimit){
+    _goNextPage();
+    await _waitSeconds(3000);
+    connectOnPage(limit, note);
+  }
 }
 
 async function _scrollDown() {
