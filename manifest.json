@@ -7,14 +7,19 @@
     "type": "module"
   },
   "description": "Automatically connect with note on Linkedin",
-  "permissions": ["scripting","activeTab", "storage", "tabs","declarativeNetRequestWithHostAccess"],
+  "permissions": ["scripting","activeTab", "storage", "tabs","declarativeNetRequestWithHostAccess", "webNavigation"],
   
   "action": {
     "default_title": "Linkedin-Connect-Note",
     "default_popup": "popup.html"
   },
-
    "host_permissions": [
       "<all_urls>"
-   ]
+   ],
+   "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": ["content.js"]
+    }
+  ]
 }

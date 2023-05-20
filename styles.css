@@ -23,6 +23,11 @@ textarea {
 	height: 40px;
 }
 
+#go_button {
+	width: 100%;
+	height: 40px;
+}
+
 
 /* input {
   display: inline-block;
