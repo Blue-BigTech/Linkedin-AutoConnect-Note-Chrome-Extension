@@ -35,6 +35,28 @@ async function connectOnPage(limit, note){
     if(spanText === "Connect"){
       allButtons[i].click();
       await _waitSeconds(2000);
+      // const dialog = document.getElementById("artdeco-modal-outlet");
+      // console.log(dialog)
+      // console.log("==========>", dialog.children[0].children[0].children.length)
+      
+      // if(dialog.children[0].children[0].children.length !== 0) {
+      //   const quit = document.getElementsByClassName("artdeco-modal__dismiss artdeco-button artdeco-button--circle artdeco-button--muted artdeco-button--2 artdeco-button--tertiary ember-view")[0];
+      //   quit.click();
+      //   _waitSeconds(1000);
+      //   continue;
+      // }
+      var wedontknowBtn = document.querySelector('[aria-label="We don\'t know each other"]');
+      console.log('wedonknowbtn=>', wedontknowBtn)
+      if(wedontknowBtn !== undefined && wedontknowBtn !== null) {
+        wedontknowBtn.click();
+        await _waitSeconds(1000);
+        var connectBtn = document.querySelector('[aria-label="Connect"]');
+        connectBtn.click();
+        await _waitSeconds(1000);
+        var connectBtn1 = document.querySelector('[aria-label="Connect"]');
+        connectBtn1.click();
+        await _waitSeconds(1000);
+      }
       var addNoteBtn = document.querySelector('[aria-label="Add a note"]');
       addNoteBtn.click();
       await _waitSeconds(2000);
